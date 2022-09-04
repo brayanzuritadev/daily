@@ -21,8 +21,8 @@ func ReviewUser(usuario models.Usuario) (models.Usuario, bool, string) {
 	ID := usuario.ID.Hex()
 
 	if err != nil {
-		return usuario, false, "error al buscar al usuario"
+		return usuario, false, ID
 	}
 
-	return usuario, false, ID
+	return usuario, true, ID
 }

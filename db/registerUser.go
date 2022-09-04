@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func RegisterUser(u models.Usuario) (bool, error, string) {
+func RegisterUser(u models.Usuario) (string, bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -19,10 +19,10 @@ func RegisterUser(u models.Usuario) (bool, error, string) {
 	result, err := col.InsertOne(ctx, u)
 
 	if err != nil {
-		return false, err, "No se logro registrar el usuario"
+		return "", false, err
 	}
 
 	ObjID, _ := result.InsertedID.(primitive.ObjectID)
 
-	return true, nil, ObjID.String()
+	return ObjID.String(), true, nil
 }

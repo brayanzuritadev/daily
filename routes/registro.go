@@ -26,19 +26,19 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, checkUser, status := db.ReviewUser(u)
-	if checkUser == true {
-		http.Error(w, status, 400)
+	_, found, _ := db.ReviewUser(u)
+	if found == true {
+		http.Error(w, "El email del usuario ya existe dentro la base de datos", 400)
 		return
 	}
 
-	check, err, status := db.RegisterUser(u)
+	_, status, err := db.RegisterUser(u)
 	if err != nil {
-		http.Error(w, status+err.Error(), 400)
+		http.Error(w, "no se pudo registrar al usuario dentro la base de datos "+err.Error(), 400)
 	}
 
-	if check == false {
-		http.Error(w, status, 400)
+	if status == false {
+		http.Error(w, "no se a logrado insertar el registro del usuario", 400)
 	}
 	w.WriteHeader(http.StatusCreated)
 }
