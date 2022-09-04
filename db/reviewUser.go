@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func ReviewUser(usuario models.Usuario) (models.Usuario, bool, string) {
+func ReviewUser(usuario models.User) (models.User, bool, string) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 

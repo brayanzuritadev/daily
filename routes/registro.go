@@ -2,13 +2,14 @@ package routes
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/brayanzuritadev/daily/db"
 	"github.com/brayanzuritadev/daily/models"
-	"net/http"
 )
 
 func Register(w http.ResponseWriter, r *http.Request) {
-	var u models.Usuario
+	var u models.User
 
 	err := json.NewDecoder(r.Body).Decode(&u)
 	if err != nil {

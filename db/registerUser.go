@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func RegisterUser(u models.Usuario) (string, bool, error) {
+func RegisterUser(u models.User) (string, bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
